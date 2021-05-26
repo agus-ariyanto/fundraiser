@@ -1,0 +1,52 @@
+<div class="border-bottom mb-3">
+    <div class="row mb-3">
+        <div class="col">
+            <strong>Agus Ariyanto</strong>
+        </div>
+        <div class="col-8 italic text-muted text-center">
+            Title Campaign
+        </div>
+        <div class="col text-end">
+            Reply : 12/05/2021
+        </div>
+    </div>
+
+
+    <div class="mb-3">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div class="mb-3 text-end">
+        <button type="button" class="btn btn-outline-primary btn-sm">
+            <span class="fa fa-reply"></span>&nbsp;Reply
+        </button>
+        <button type="button" class="btn btn-outline-secondary btn-sm">
+            <span class="fa fa-pencil"></span>&nbsp;Sensor Kata
+        </button>
+        <button type="button" class="btn btn-danger btn-sm">
+            <span class="fa fa-times"></span>&nbsp;Hapus
+        </button>
+
+    </div>
+</div>
+
+<form ng-submit="submit()">
+    <div class="grey-backdrop p-3">
+        <div class="col-md-5 form text-start py-3">
+            <div class="mb-3 py-3 italic small">
+                <small>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </small>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea id="textarea" class="form-control" style="height:100px"></textarea>
+                <label for="textarea">reply</label>
+            </div>
+            <div class="separator-double"></div>
+            <div class="text-end">
+                <button type="button" class="btn btn-light" ng-click="closeModal()">Cancel</button>
+                <button type="simpan" class="btn btn-primary">Reply</button>
+            </div>
+
+        </div>
+    </div>
+</form>

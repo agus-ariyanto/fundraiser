@@ -1,0 +1,21 @@
+<style media="screen">
+    /* lihat style .menu-left>width untuk tweak body padding-left */
+    body{
+        padding-left:140px;
+    }
+</style>
+<div class="menu-left">
+    <span ng-click="toTab(a.tab)" class="menu-left-item {{a.active?'active':''}}" ng-repeat="a in data">
+        <span class="menu-left-icon fa fa-{{a.icon}}"></span>
+        {{a.title}}
+    </span>
+    <hr>
+    <span ng-click="logout()" class="menu-left-item">
+        <span class="menu-left-icon fa fa-power-off"></span>
+        Logout
+    </span>
+</div>
+<div class="text-end border-bottom py-3">
+    <h4 class="text-right text-muted"><span class="title-icon fa fa-{{title.icon}}"></span><strong>{{title.title}}</strong></h4>
+</div>
+<div class="separator-double"></div>

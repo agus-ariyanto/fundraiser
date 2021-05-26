@@ -1,0 +1,47 @@
+<div class="col-md-6 mb-6">
+    <h3 class="text-center"> Title Untuk Ini</h3>
+    <div class="small" style="font-size:0.8em">
+        <div>Bank BNI</div>
+        <div>Amin Mualim</div>
+        <div>Rek.
+            <strong><span id="copy-rek">2312321312312</span></strong>&nbsp;&nbsp;
+            <span class="fa fa-copy pointer p-2" ng-click="clipboard('copy-rek')"></span>
+        </div>
+    </div>
+    <hr>
+
+    <div class="separator-double"></div>
+    <input type="file" name="photo_upload"
+        onchange="angular.element(this).scope().photoOnChange(this)"
+        accept="image/xpng, image/jpeg"
+        style="display: none;"
+        id="photo-upload">
+    <div class="mb-3">
+
+        <label for="exampleFormControlInput1" class="form-label">Nama</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">No. Kontak</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="nomor hp atau telpon">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Nominal</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="sesuai jumlah transfer">
+      </div>
+      <div class="mb-3 bg-white p-2 border border-grey">
+          <div class="d-grid">
+              <span class="btn btn-light btn-block" ng-click="photoUpload()" ng-show="!data.image">Upload Foto Bukti Tansfer</span>
+          </div>
+          <div class="text-end py-2" ng-show="data.image">
+              <span class="btn btn-danger btn-sm" ng-click="data.image=null">
+                  <span class="fa fa-times"></span>
+              </span>
+          </div>
+          <img src="api/{{data.image}}" class="" style="width:100%; height:auto" ng-show="data.image">
+      </div>
+      <div class="text-end mb-3">
+        <button type="button" class="btn btn-light" ng-click="back()">&nbsp;Batal&nbsp;</button>
+        <button type="button" class="btn btn-primary">&nbsp;Kirim&nbsp;</button>
+      </div>
+</div>

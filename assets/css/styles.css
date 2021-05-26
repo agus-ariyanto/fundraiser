@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'Pangolin';
+    src: url('../fonts/Pangolin-Regular.ttf');
+}
+@font-face{
+    font-family: 'Piedra';
+    src:url('../fonts/Piedra-Regular.ttf');
+}
+.pangolin{
+    font-family:Pangolin;
+}
+.piedra{
+    font-family: piedra;
+}
+/* body{
+    padding-top:40px;
+} */
+.pointer{
+    cursor: pointer;
+}
+.separator{
+    width:100%;
+    height:20px;
+    display: block;
+}
+
+.separator-double{
+    width:100%;
+    height:40px;
+    display: block;
+}
+.lowercase{
+    text-transform: lowercase;
+}
+.uppercase{
+    text-transform:uppercase;
+}
+
+
+.margin-auto{
+    margin:auto;
+}
+
+.login{
+    margin:auto;
+    border: 1px solid #cacaca;
+    padding-top:60px;
+    padding-bottom:30px;
+}
+.padding-bottom{
+    padding-bottom:20px;
+}
+
+.grey-backdrop{
+    position:fixed;
+    z-index:9999;
+    text-align: center;
+    width:100%;
+    height:100vh;
+    display:block;
+    top:0;left:0;
+    background-color:rgba(57, 56, 57, 0.65);
+    overflow-x:hidden;
+}
+.grey-backdrop > img{
+    height:100vh;
+    width:auto;
+    border:2px solid #cacaca;
+}
+
+.grey-backdrop > .form{
+    margin: auto;
+    background-color: white;
+    padding:15px;
+    padding-top:40px;
+}
+
+.small{
+    font-size: 0.9em;
+}
+.italic{
+    font-style: italic;
+}
+
+.brand-icon {
+    display: inline-block;
+    padding-left:1em;
+    padding-right:1em;
+
+}
+
+.menu{
+    display:block;
+    width:100%;
+    height:3em;
+    line-height: 3em;
+    cursor: pointer;
+    padding-left: 1.5em;
+    font-weight: bold;
+}
+.menu > .icon{
+    width:2em;
+    display: inline-block;
+}
+.menu:hover{
+    background-color:#b6d0f7;
+}
+
+.menu-left{
+    width:140px;
+    height:100vh;
+    display:block;
+    position:absolute;
+    left:0;
+    top:0;
+    padding-top:40px;
+    background-color: #014983;
+}
+.menu-left-item{
+    display: block;
+    width:100%;
+    height:40px;
+    line-height: 40px;
+    color:whitesmoke;
+    cursor: pointer;
+    padding-left: 20px;
+    text-shadow: 1px 1px 1px #333;
+}
+.menu-left-item:hover{
+    background-color: #013762;
+    color:white;
+    text-decoration: none;
+}
+
+.menu-left-item.active{
+    background-color: #011f37;
+    color:white;
+}
+.menu-left-icon{
+    width:2em;
+}
+.title-icon{
+    padding-right:20px;
+}
