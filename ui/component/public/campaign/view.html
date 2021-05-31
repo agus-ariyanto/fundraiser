@@ -1,0 +1,63 @@
+<div class="border-bottom {{c.theme_border}} mb-3" ng-repeat="c in table">
+    <div class="{{c.theme_bgtxt}} p-1">
+        <h3 class="text-center">{{c.title}}</h3>
+        <div class="row">
+            <div class="col" ng-repeat="cc in c.picture" ng-click="showImage(cc)">
+                <img src="api/{{cc.image}}" style="width:100%;height:auto">
+            </div>
+        </div>
+        <div class="p-3" ta-bind ng-model="c.content"></div>
+        <div class="row  p-3 small">
+            <div class="col mb-3">
+                <div class="g-3">Rekening</div>
+                <div class="g-3"><span class="fa fa-coins small-icon"></span><span>{{c.rek_bank}}</span></div>
+                <div class="g-3"><span class="fa fa-qrcode small-icon"></span><span id="rekno-{{c.id}}">{{c.rek_rekno}}</span> <span class="fa fa-copy small-icon" ng-click="copyRekno('#rekno-'+c.id)"></span></div>
+                <div class="g-3"><span class="fa fa-user-tie small-icon"></span><span>{{c.rek_an}}</span></div>
+            </div>
+            <div class="col mb-3">
+                <div>Contact</div>
+                <div><span class="fa fa-user small-icon"></span><span>{{c.contact_name}}</span></div>
+                <div><span class="fa fa-phone small-icon"></span><span>{{c.contact_phone}}</span></div>
+                <div><span class="fa fa-envelope small-icon"></span><span>{{c.contact_email}}</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 py-3">
+        <div class="col-12 px-2 p-1">
+            <div class="progress" style="height:2em">
+                <div class="progress-bar {{c.theme_bgtxt}} px-3" role="progressbar"
+                style="width: {{amountPercent(c.amount,c.goal)}}%"
+                aria-valuenow="{{amountPercent(c.amount,c.goal)}}"
+                aria-valuemin="0"
+                aria-valuemax="100">Rp. {{helper.toCurrency(c.amount)}} / Rp. {{helper.toCurrency(c.goal)}}</div>
+            </div>
+        </div>
+
+
+        <div class="col-6 px-2">
+            <div class="col mb-3 rounded border {{c.theme_border}} p-2">
+                <div class="">Terkumpul</div>
+                <div class="bg-light rounded border p-1">Rp. {{helper.toCurrency(c.amount)}}</div>
+            </div>
+        </div>
+        <div class="col-6 px-2">
+            <div class="col mb-3 rounded border {{c.theme_border}} p-2">
+                <div class="">Target</div>
+                <div class="bg-light rounded border p-1">Rp. {{helper.toCurrency(c.goal)}}</div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-right" aria-controls="offcanvasWithBothOptions" ng-click="getComments(c)">
+                <span class="fa fa-comment"></span>
+            </button>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-right" aria-controls="offcanvasWithBothOptions" ng-click="getDonatur(c)">
+                <span class="fa fa-calculator"></span>
+            </button>
+            <button class="btn btn-outline-secondary" type="button" ng-click="tab=1">
+                <span class="fa fa-heart"></span>&nbsp;&nbsp;&nbsp;Donasi
+            </button>
+        </div>
+    </div>
+</div>

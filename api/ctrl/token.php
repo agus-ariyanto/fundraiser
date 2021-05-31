@@ -1,9 +1,8 @@
-<?php 
+<?php
 class Token extends Login{
     // hanya untuk secure sembunyi login ctrler
     function __construct(){
         parent::__construct();
-        
     }
 
     protected function insertLog(){

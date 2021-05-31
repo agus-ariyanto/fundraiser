@@ -52,8 +52,31 @@ class Ctrl extends Base{
         $this->notfound();
     }
 
+    protected function selectChild($modelchild,$model_id){
+        $this->addModel($modelchild);
+        $this->$modelchild->andWhere($this->model.'_id',$model_id);
+        return $this->$modelchild->select();
+    }
+
     function select(){
-        $this->data($this->db->select($this->model,$this->Params));
+        $cascade=!empty($this->Params->key('child'))||!empty($this->Params->key('cascade')) ;
+        $res=$this->db->select($this->model,$this->Params);
+        $this->data($res);
+        if(!$cascade) return ;
+
+        // select child
+        $model=$this->model;
+        $this->addModel($model);
+        $haschild=$this->$model->child;
+        if(empty($haschild)) return ;
+        $child=explode(',',$haschild);
+        $data=array();
+        foreach($res['data'] as $key=>$value){
+            foreach($child as $model_child) $value[$model_child]=$this->selectChild($model_child,$value['id']);
+            $data[]=$value;
+        }
+        $res['data']=$data;
+        $this->data($res);
     }
 
 
@@ -65,24 +88,70 @@ class Ctrl extends Base{
         }
         $this->data($res);
     }
+    function saveChild($modelchild,$model_id){
+        $data=array();
+        if(empty($this->Params->key($modelchild))) return $data;
+        $params=new Params;
+        $this->addModel($modelchild);
+        $parchild=$this->Params->key($modelchild);
+        $colnames=$this->$modelchild->colNames();
 
+
+
+        foreach ($parchild as $parkey => $parvalue) {
+            $params->clear();
+            foreach($colnames as $colkey=>$colvalue)
+                if(isset($parvalue[$colkey])) $params->set($colkey,$parvalue[$colkey]);
+            $params->set($this->model.'_id',$model_id);
+            $id=$this->$modelchild->savePost($params->all());
+            $data[]=$this->$modelchild->select($id);
+        }
+        return $data;
+    }
     function insert(){
-        $this->data( $this->db->insert($this->model,$this->Params));
+        $res=$this->db->insert($this->model,$this->Params);
+        $model=$this->model;
+        $this->data($res);
+        $this->addModel($model);
+
+        // check child
+        if(empty($this->$model->child)) return ;
+
+        //insert child
+        $child=explode(',',$this->$model->child);
+        foreach($child as $model_child) $res[$model_child]=$this->saveChild($model_child,$res['id']);
+        $this->data($res);
     }
 
     function update(){
-        if(!empty($this->model_id))
-            $this->data( $this->db->update($this->model,$this->Params,$this->model_id) );
+        if(empty($this->model_id)) return $this->data(0);
+
+        $res=$this->db->update($this->model,$this->Params,$this->model_id);
+        $model=$this->model;
+        $this->data($res);
+
+        $this->addModel($model);
+        // check child
+        if(empty($this->$model->child)) return ;
+
+        //insert child
+        $child=explode(',',$this->$model->child);
+        foreach($child as $model_child) $res[$model_child]=$this->saveChild($model_child,$res['id']);
+        $this->data($res);
     }
 
     function save(){
         if(empty($this->Params->key('id'))) return $this->insert();
-        $model=$this->model;
-        $this->addModel($model);
-        $this->data($this->$model->savePost($this->Params->all()));
+        $this->model_id=$this->Params->key('id');
+        $this->update();
     }
 
     function delete(){
+        if($this->authlogin['grup_id']>2){
+            $this->status(404);
+            $this->data(0);
+            return ;
+        }
         $model=$this->model;
         $this->addModel($model);
         $count=$this->$model->delete($this->model_id);

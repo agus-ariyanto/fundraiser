@@ -218,8 +218,10 @@ class DbJoin extends DbSQL{
     function update($model,$params,$id){
         $params->del('id');
         $qry=$this->queryUpdate($model,$params->all(),$id);
+        // return $qry;
         $res=$this->query($qry);
-        if(empty($res)) return 0;
+        // return $res;
+        // if(empty($res)) return 0;
         $table=$this->model($model);
         $model=new $table;
         return $model->select($id);

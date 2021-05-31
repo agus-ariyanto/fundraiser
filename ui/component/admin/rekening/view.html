@@ -1,0 +1,50 @@
+<table class="table" ng-show="step==0">
+    <thead>
+        <tr>
+            <td>Rek. No</td>
+            <td>Bank</td>
+            <td>Atas Nama</td>
+            <td class="text-end">
+                <button type="button" class="btn btn-primary" ng-click="add()">
+                    <span class="fa fa-plus"></span>
+                </button>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="r in table">
+            <td>{{r.rekno}}</td>
+            <td>{{r.bank}}</td>
+            <td>{{r.an}}</td>
+            <td class="text-end">
+                <button type="button" class="btn btn-outline-secondary btn-sm" ng-click="edit(r)">
+                    <span class="fa fa-edit fa-lg"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<form ng-submit="submit()" ng-show="step==1">
+    <div class="grey-backdrop p-3">
+        <div class="col-md-5 form text-start py-3">
+            <div class="form-floating mb-3">
+                <input id="rekno" type="text" class="form-control" ng-model="data.rekno" required>
+                <label for="textarea">Rek. No.</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="bank" type="text" class="form-control" ng-model="data.bank" required>
+                <label for="bank">Bank</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="an" type="text" class="form-control" ng-model="data.an" required>
+                <label for="an">Atas Nama</label>
+            </div>
+            <div class="text-end">
+                <button type="button" class="btn btn-light" ng-click="step=0">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</form>

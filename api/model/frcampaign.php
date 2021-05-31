@@ -13,6 +13,7 @@ class FrCampaign extends Model{
         'title'=>'VARCHAR(128)',
         'content'=>'TEXT',
         'amount'=>'INT DEFAULT 0',
+        'donatur'=>'INT DEFAULT 0',
         'goal'=>'INT','theme_id'=>'INT DEFAULT 1',
         'confirmed'=>'INT DEFAULT 0',
         'ts'=>'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
@@ -20,6 +21,6 @@ class FrCampaign extends Model{
         'stop'=>'DATETIME',
         'status'=>'INT DEFAULT 0',
     );
-    public $join='rek,contact';
+    public $join='rek,contact,theme';
     public $child='picture';
 }

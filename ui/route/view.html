@@ -2,15 +2,18 @@
     <!-- form donasi -->
 </div>
 
+<div alt-component="public/picture" data-scope="picture" ng-show="child_tab==2"></div>
+
+
 <div class="offcanvas offcanvas-end" id="offcanvas-right" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title">Backdroped with scrolling</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body" alt-component="public/comment" data-scope="comment" ng-show="false">
+    <div class="offcanvas-body" alt-component="public/comment" data-scope="comment" ng-show="child_tab==0">
         <!-- comment form & list -->
     </div>
-    <div class="offcanvas-body" alt-component="public/donatur" data-scope="donatur" ng-show="true">
+    <div class="offcanvas-body" alt-component="public/donatur" data-scope="donatur" ng-show="child_tab==1">
         <!-- donatur -->
     </div>
 </div>
@@ -22,88 +25,96 @@
     </div>
     <div class="offcanvas-body" style="padding-left:0;padding-right:0">
 
-        <span class="menu">
+        <span class="menu" ng-click="tab=1">
             <span class="icon fa fa-book"></span> Arsip
         </span>
-        <span class="menu">
+        <span class="menu" ng-click="tab=1">
             <span class="icon fa fa-comments"></span> FAQ
         </span>
-        <span class="menu">
+        <span class="menu" ng-click="tab=1">
             <span class="icon fa fa-users"></span> Tentang Kami
         </span>
     </div>
  </div>
 
-<div class="row py-3 px-2" ng-show="tab==0">
-    <div class="col-1">
-        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-left">
-            <span class="fa fa-bars"></span>
-        </button>
-    </div>
-    <div class="col-11">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                <span class="fa fa-search"></span>
-            </button>
-          </div>
+ <div class="row py-3 px-2">
+     <div class="col-1">
+         <button type="button" class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-left">
+             <span class="fa fa-bars"></span>
+         </button>
+     </div>
+     <div class="col-11">
+         <div class="input-group mb-3">
+             <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+             <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                 <span class="fa fa-search"></span>
+             </button>
+         </div>
 
-    </div>
+     </div>
 
-</div>
+ </div>
 
-<div ng-show="tab==0">
-    <div class="bg-warning text-white p-3">
-        <h3 class="text-center">Title Untuk Ini</h3>
+<div class="border-bottom {{c.theme_border}} mb-3" ng-repeat="c in table">
+    <div class="{{c.theme_bgtxt}} p-1">
+        <h3 class="text-center">{{c.title}}</h3>
         <div class="row">
-            <div class="col" ng-click="showImage(i)">
-                <img src="api/upload/1.jpg" style="width:100%;height:auto">
+            <div class="col" ng-repeat="cc in c.picture" ng-click="showImage(cc)">
+                <img src="api/{{cc.image}}" style="width:100%;height:auto">
             </div>
-            <div class="col">
-                <img src="api/upload/2.jpg" style="width:100%;height:auto">
-            </div>
-            <div class="col">
-                <img src="api/upload/3.jpg" style="width:100%;height:auto">
-            </div>
-
         </div>
-        <div class="py-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos vero, molestiae corrupti facere totam nesciunt minus, commodi eos sequi ab similique eligendi aliquid ipsa. Alias, accusantium quidem. Error, asperiores rem.
+        <div class="p-3" ta-bind ng-model="c.content"></div>
+        <div class="row  p-3 small">
+            <div class="col mb-3">
+                <div class="g-3">Rekening</div>
+                <div class="g-3"><span class="fa fa-coins small-icon"></span><span>{{c.rek_bank}}</span></div>
+                <div class="g-3"><span class="fa fa-qrcode small-icon"></span><span>{{c.rek_rekno}}</span> <span class="fa fa-copy"></span> </div>
+                <div class="g-3"><span class="fa fa-user-tie small-icon"></span><span>{{c.rek_an}}</span></div>
+            </div>
+            <div class="col mb-3">
+                <div>Contact</div>
+                <div><span class="fa fa-user small-icon"></span><span>{{c.contact_name}}</span></div>
+                <div><span class="fa fa-phone small-icon"></span><span>{{c.contact_phone}}</span></div>
+                <div><span class="fa fa-envelope small-icon"></span><span>{{c.contact_email}}</span></div>
+            </div>
         </div>
-
     </div>
+
     <div class="row g-3 py-3">
         <div class="col-12 px-2 p-1">
-            <div class="progress">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+            <div class="progress" style="height:2em">
+                <div class="progress-bar {{c.theme_bgtxt}} px-3" role="progressbar"
+                style="width: {{amountPercent(c.amount,c.goal)}}%"
+                aria-valuenow="{{amountPercent(c.amount,c.goal)}}"
+                aria-valuemin="0"
+                aria-valuemax="100">Rp. {{helper.toCurrency(c.amount)}} / Rp. {{helper.toCurrency(c.goal)}}</div>
             </div>
         </div>
 
 
         <div class="col-6 px-2">
-            <div class="col mb-3 rounded border p-2">
-                <div class="">Goal</div>
-                <div class="bg-light rounded border p-1">Rp. 1.000.000.000</div>
+            <div class="col mb-3 rounded border {{c.theme_border}} p-2">
+                <div class="">Terkumpul</div>
+                <div class="bg-light rounded border p-1">Rp. {{helper.toCurrency(c.amount)}}</div>
             </div>
         </div>
         <div class="col-6 px-2">
-            <div class="col mb-3 rounded border p-2">
-                <div class="">Total</div>
-                <div class="bg-light rounded border p-1">Rp. 1.000.000.000</div>
+            <div class="col mb-3 rounded border {{c.theme_border}} p-2">
+                <div class="">Target</div>
+                <div class="bg-light rounded border p-1">Rp. {{helper.toCurrency(c.goal)}}</div>
             </div>
         </div>
 
         <div class="col-12">
-            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-right" aria-controls="offcanvasWithBothOptions">
+            <button class="btn btn-outline-secondary" type="button" ng-click="openComments(c)">
                 <span class="fa fa-comment"></span>
             </button>
-            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-right" aria-controls="offcanvasWithBothOptions">
+            <button class="btn btn-outline-secondary" type="button" ng-click="openDonatur(c)">
                 <span class="fa fa-calculator"></span>
             </button>
-            <button class="btn btn-outline-secondary" type="button" ng-click="tab=1">
+            <button class="btn btn-outline-secondary" type="button" ng-click="openDonasi">
                 <span class="fa fa-heart"></span>&nbsp;&nbsp;&nbsp;Donasi
             </button>
         </div>
     </div>
-
 </div>

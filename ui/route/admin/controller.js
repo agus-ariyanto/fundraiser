@@ -3,14 +3,16 @@ define(['ui/system/api','ui/system/helper'], function(){
     function($scope, $auth, Api, Helper ){
 
         $scope.menu={
-            tab:2,
+            tab:0,
             title:{},
             top:[],
             data:[
-                    {icon:'flag',title:'Campaign',tab:0,top:[]},
-                    {icon:'calculator',title:'Donatur',tab:1,top:[]},
-                    {icon:'comment',title:'Comment',tab:2,top:[]},
-                    {icon:'book',title:'Archieve',tab:3,top:[]},
+                    {icon:'flag',title:'Campaign',tab:0,active:true},
+                    {icon:'calculator',title:'Donatur',tab:1},
+                    {icon:'comment',title:'Comment',tab:2},
+                    {icon:'phone',title:'Contact',tab:3},
+                    {icon:'qrcode',title:'Rekening',tab:4},
+                    {icon:'book',title:'Archieve',tab:5}
                 ]
         }
 
@@ -22,11 +24,32 @@ define(['ui/system/api','ui/system/helper'], function(){
         }
 
         // komponen
-        $scope.campaign={};
+        // overwrite dari /component/campaign
+        $scope.campaign={
+            contact:[],
+            rek:[],
+            table:[],
+            init:function(){
+                Api.Get('rek',{order:'id ASC'})
+                .then(function(res){
+                    $scope.campaign.rek=res.data;
+                    return Api.Get('contact',{order:'id ASC'});
+                })
+                .then(function(res){
+                    $scope.campaign.contact=res.data;
+                    return Api.Get('campaign',{cascade:1});
+                })
+                .then(function(res){
+                    $scope.campaign.table=[];
+                    $scope.campaign.table=res.data;
+                });
+            }
+        };
         $scope.comment={};
         $scope.donatur={};
-
-
+        $scope.rekening={};
+        $scope.contact={};
+        $scope.menu.toTab(0);
 
 /*end controller*/
         }];

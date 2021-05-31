@@ -1,10 +1,14 @@
 <?php
+ // grup_id
+ // 1 : admin saja
+ // 5 : public
+ // 5 => autologin
 class FrAuth extends Model{
     protected $alias = 'auth';
     protected $columns=array(
         'email'=>'VARCHAR(128)',
         'pwd'=>'VARCHAR(128)',
-        'grup_id'=>'INT DEFAULT 5', // 1 untuk superadmin saja 5 untuk public
+        'grup_id'=>'INT DEFAULT 5',
         'token'=>'TEXT',
     );
 
@@ -18,7 +22,7 @@ class FrAuth extends Model{
             'pwd'=>'d033e22ae348aeb5660fc2140aec35850c4da997',
             'grup_id'=>'1',
 		),
-        
+
         array(
             'id'=>'2',
 			'email'=>'user',
@@ -27,6 +31,6 @@ class FrAuth extends Model{
 		),
 
 	);
-    
+
 
 }

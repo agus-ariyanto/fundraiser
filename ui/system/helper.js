@@ -61,7 +61,7 @@ define([], function(){
         }
 
         api.toCurrency=function(val){
-          if(val==''||val==undefined||val==0||val=='0') return '';
+          if(val==''||val==undefined||val==0||val=='0') return '0';
           var v=val.toString().replace(/[^0-9]/g,'');
           return v.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
         }

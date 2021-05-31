@@ -29,9 +29,24 @@ class Login extends Base{
         $this->auth->andWhere('email',$this->params->key('email'));
         $this->auth->andWhere('pwd',sha1($this->params->key('password')));
         $res=$this->auth->select();
-        $token=0;
-        if(count($res)>0) $token= empty($res[0]['token']) ?  $this->createToken($res[0]['id']) : $res[0]['token'];
-        $this->data($token);
+
+        $data=array(
+            'userdata'=>array(),
+            'token'=>0,
+        );
+        if(count($res)>0) {
+            $userdata=$res[0];
+            unset($userdata['pwd']);
+            unset($userdata['token']);
+            $token= empty($res[0]['token']) ?  $this->createToken($res[0]['id']) : $res[0]['token'];
+            $data=array(
+                'userdata'=>$userdata,
+                'token'=>$token,
+            );
+        }
+
+        $this->data($data);
+
     }
 
     function check(){
