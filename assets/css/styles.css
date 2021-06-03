@@ -146,3 +146,7 @@
 .small-icon{
     width:40px;
 }
+
+.comments{
+    min-height:40px;
+}

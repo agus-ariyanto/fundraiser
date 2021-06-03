@@ -8,6 +8,7 @@ define(['ui/system/api','ui/system/helper'], function(){
         $scope.table=[];
         $scope.tab=0;
         $scope.child_tab=0;
+        $scope.campaign={};
 
         // komponen
         $scope.comment={};
@@ -45,18 +46,20 @@ define(['ui/system/api','ui/system/helper'], function(){
             return 'assets/img/picture.png';
         }
         $scope.showImage=function(val){
-            $scope.picture.image=val;
+            // disable dulu
+            return ;
+
+            $scope.picture.image=val.image;
             $scope.child_tab=2;
         }
         $scope.openComments=function(val){
-            Api.Get('comment',{cascade:1,campaign_id:{equal:val.id}})
-            .then(function(res){
-                $scope.comment.table=res.data;
-            });
-
+            $scope.comment.campaign=val;
+            $scope.comment.init();
+            $scope.child_tab=0;
+            rightCanvas.show();
         }
 
-        $scope.init();
+         $scope.init();
 
 /*end controller*/
         }];

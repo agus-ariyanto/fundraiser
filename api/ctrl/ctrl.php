@@ -72,7 +72,8 @@ class Ctrl extends Base{
         $child=explode(',',$haschild);
         $data=array();
         foreach($res['data'] as $key=>$value){
-            foreach($child as $model_child) $value[$model_child]=$this->selectChild($model_child,$value['id']);
+            foreach($child as $model_child)
+                $value[$model_child]=$this->selectChild($model_child,$value['id']);
             $data[]=$value;
         }
         $res['data']=$data;

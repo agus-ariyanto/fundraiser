@@ -4,7 +4,8 @@ class FrDonatur extends Model{
     protected $columns=array(
         'campaign_id'=>'INT',
         'name'=>'VARCHAR(128)',
-        'number'=>'VARCHAR(128)',
+        'ha'=>'INT DEFAULT 0',
+        'phone'=>'VARCHAR(128)',
         'email'=>'VARCHAR(256)',
         'city'=>'VARCHAR(256)',
         'confirmed'=>'INT DEFAULT 0',

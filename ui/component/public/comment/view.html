@@ -1,180 +1,70 @@
 <div class="col" ng-show="tab==1">
     <div class="mb-3">
-       <input type="text" class="form-control form-control-sm" placeholder="masukkan nama">
+       <input type="text" ng-model="data.name" class="form-control form-control-sm" placeholder="masukkan nama">
     </div>
     <div class="mb-3">
-       <textarea name="" class="form-control form-control-sm" rows="2" placeholder="pertanyaan"></textarea>
+       <input type="text" ng-model="data.phone" class="form-control form-control-sm" placeholder="masukkan nomor kontak">
+       <span class="small italic"><small>* kontak anda tidak akan kami tampilkan</small></span>
+    </div>
+    <div class="mb-3">
+       <textarea  class="form-control form-control-sm" rows="2" ng-model="data.content" placeholder="pertanyaan"></textarea>
     </div>
     <div class="mb-3 text-end">
         <button type="button" class="btn btn-light btn-sm" ng-click="tab=0">
             &nbsp;&nbsp;Batal
         </button>
-       <button type="button" class="btn btn-primary btn-sm">
+       <button type="button" class="btn btn-primary btn-sm" ng-click="submit()">
            <span class="fa fa-paper-plane"></span>&nbsp;&nbsp;Kirim
        </button>
     </div>
 </div>
 
 <div class="col mb-1 text-end" ng-show="tab==0">
-       <button type="button" class="btn btn-primary btn-sm" ng-click="tab=1">
+       <button type="button" class="btn btn-primary btn-sm" ng-click="add()">
            <span class="fa fa-plus"></span>
        </button>
 </div>
 
-<div class="col border bg-light small p-2" ng-show="tab==0">
-    <div class="row py-2">
-        <div class="col-10 p-2">
-            <div class=""><strong>email at mbuh</strong></div>
-            <div class="small mt-2"> <em>
-                Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. <br>
-                Laboriosam excepturi fugit consequuntur molestiae
-                repellendus ut non quod sunt cumque
-                rerum architecto amet tenetur officiis.
-                </em>
-            </div>
-            <div class="row small mt-2">
-                <div class="col">
-                    <em>12 mei 2020</em>
+<div class="col border bg-light small p-2 comments" ng-show="tab==0">
+    <div ng-repeat="cm in table">
+        <div class="row py-1">
+            <div class="col-11">
+                <div class="p-3 bg-white rounded small">
+                    <div class="col"><strong>{{cm.name}}</strong></div>
+                    <pre class="text-reset">{{cm.content}}</pre>
+                    <div class="row">
+                        <div class="col">
+                            <em>{{helper.toFormat(cm.ts)}}</em>
+                        </div>
+                        <div class="col text-end">
+                            <strong ng-click="reply(cm)" class="pointer">
+                                <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
+                            </strong>
+                        </div>
+                    </div>
                 </div>
-                <div class="col text-end">
-                    <strong ng-click="tab=1">
-                        <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
-                    </strong>
-                </div>
-
-
+                <div class="col"></div>
             </div>
-            <div class="col-2"></div>
         </div>
-    </div>
 
-    <div class="row py-2">
-        <div class="col-2"></div>
-        <div class="col-10 p-2">
-            <div><strong>email at mbuh</strong></div>
-            <div class="small mt-2"> <em>
-                Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. <br>
-                Laboriosam excepturi fugit consequuntur molestiae
-                repellendus ut non quod sunt cumque
-                rerum architecto amet tenetur officiis.
-                </em>
-            </div>
-            <div class="row small mt-2">
-                <div class="col">
-                    <em>12 desember 2020</em>
-                </div>
-                <div class="col text-end">
-                    <strong>
-                        <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
-                    </strong>
+
+        <div class="row py-1" ng-repeat="rp in cm.reply">
+            <div class="col"></div>
+            <div class="col-11">
+                <div class="px-3 bg-white rounded small">
+                    <div class="mb-1"><strong>{{rp.name}}</strong></div>
+                    <pre class="text-reset">{{rp.content}}</pre>
+                    <div class="row">
+                        <div class="col">
+                            <em>{{helper.toFormat(rp.ts)}}</em>
+                        </div>
+                        <div class="col text-end">
+                            <strong ng-click="reply(cm)" class="pointer">
+                                <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
+                            </strong>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="row py-2">
-        <div class="col-10 p-2">
-            <div class=""><strong>email at mbuh</strong></div>
-            <div class="small mt-2"> <em>
-                Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. <br>
-                Laboriosam excepturi fugit consequuntur molestiae
-                repellendus ut non quod sunt cumque
-                rerum architecto amet tenetur officiis.
-                </em>
-            </div>
-            <div class="row small mt-2">
-                <div class="col">
-                    <em>12 mei 2020</em>
-                </div>
-                <div class="col text-end">
-                    <strong>
-                        <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
-                    </strong>
-                </div>
-
-
-            </div>
-            <div class="col-2"></div>
-        </div>
-    </div>
-
-    <div class="row py-2">
-        <div class="col-2"></div>
-        <div class="col-10 p-2">
-            <div><strong>email at mbuh</strong></div>
-            <div class="small mt-2"> <em>
-                Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. <br>
-                Laboriosam excepturi fugit consequuntur molestiae
-                repellendus ut non quod sunt cumque
-                rerum architecto amet tenetur officiis.
-                </em>
-            </div>
-            <div class="row small mt-2">
-                <div class="col">
-                    <em>12 desember 2020</em>
-                </div>
-                <div class="col text-end">
-                    <strong>
-                        <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
-                    </strong>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row py-2">
-        <div class="col-10 p-2">
-            <div class=""><strong>email at mbuh</strong></div>
-            <div class="small mt-2"> <em>
-                Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. <br>
-                Laboriosam excepturi fugit consequuntur molestiae
-                repellendus ut non quod sunt cumque
-                rerum architecto amet tenetur officiis.
-                </em>
-            </div>
-            <div class="row small mt-2">
-                <div class="col">
-                    <em>12 mei 2020</em>
-                </div>
-                <div class="col text-end">
-                    <strong>
-                        <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
-                    </strong>
-                </div>
-
-
-            </div>
-            <div class="col-2"></div>
-        </div>
-    </div>
-
-    <div class="row py-2">
-        <div class="col-2"></div>
-        <div class="col-10 p-2">
-            <div><strong>email at mbuh</strong></div>
-            <div class="small mt-2"> <em>
-                Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. <br>
-                Laboriosam excepturi fugit consequuntur molestiae
-                repellendus ut non quod sunt cumque
-                rerum architecto amet tenetur officiis.
-                </em>
-            </div>
-            <div class="row small mt-2">
-                <div class="col">
-                    <em>12 desember 2020</em>
-                </div>
-                <div class="col text-end">
-                    <strong>
-                        <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
-                    </strong>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
