@@ -1,34 +1,48 @@
 <style media="screen">
-    body{
-        padding-top:20px;
+.mid-hv{
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 768px) {
+    .none{
+        display: none;
+        /* //height:auto; */
     }
+}
 </style>
-
-<div class="col-md-4 login">
-    <div class="text-center">
-        <img src="assets/img/handshake-128.png">
+<div class="row">
+    <div class="col-md-8">
+        <div class="mid-hv none" style="color:#014983">
+            <h2>{{alt.title}}</h2>
+        </div>
     </div>
+    <div class="col-md-4 px-3" style="background-color:#014983;padding-top:25vh;height:100vh">
+        <div class="small mb-3 text-end">
+            <span class="pointer text-white" ng-click="back()">
+                <span class="fa fa-home"></span>&nbsp;kembali ke beranda
+            </span>
+        </div>
+        <form ng-submit="submit()">
 
-    <div class="separator-double"></div>
-    <h2 class="text-center header-small uppercase">{{alt.title}}</h2>
-    <div class="separator"></div>
-    <form class="row g-3" ng-submit="submit()">
-        <div class="col-12">
-            <input type="text" class="form-control" ng-model="data.email" placeholder="username icon" required>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="username" ng-model="data.email" required>
+            <label for="floatingInput">Username</label>
         </div>
-        <div class="col-12">
-            <input type="{{show_password?'text':'password'}}" class="form-control" ng-model="data.password" placeholder="password icon" required>
+        <div class="form-floating mb-3">
+            <input type="{{check_password?'text':'password'}}" class="form-control" id="floatingPassword" placeholder="Password" ng-model="data.password" required>
+            <label for="floatingPassword">Password</label>
         </div>
-        <div class="col-12">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" ng-model="show_password" id="show-password">
-                <label class="form-check-label" for="show-password">&nbsp;&nbsp;Show Password</label>
-            </div>
+        <div class="form-check text-white">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" ng-model="check_password">
+            <label class="form-check-label" for="flexCheckDefault">
+                Show Password
+            </label>
         </div>
-        <div class="separator-double"></div>
-        <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Login</button>
+        <div class="d-grid py-3">
+            <button type="submit" class="btn btn-light btn-lg">Login</button>
         </div>
     </form>
+    </div>
 </div>
-<div alt-component="profile" data-scope="profile" ng-show="open_profile"></div>

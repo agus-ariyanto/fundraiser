@@ -1,0 +1,50 @@
+<div class="border-bottom mb-3" ng-repeat="dn in table">
+    <div class="row">
+        <div class="col">
+            <span class="fa fa-flag"></span>&nbsp;{{dn.campaign_title}}
+        </div>
+        <div class="col">
+            <div class="mb-1 italic" >
+                <span class="text-success" ng-if="dn.confirmed==1"><strong>Terkonfirmasi</strong></span>
+                <span ng-if="dn.confirmed!=1"><strong>Belum Dikonfirmasi</strong></span>
+            </div>
+        </div>
+        <div class="col text-end">
+            <button type="button" class="btn btn-outline-primary btn-sm" ng-click="confirm(dn)" ng-if="dn.confirmed!=1">
+                <span class="fa fa-check-circle"></span>&nbsp;Confirm
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3" style="display:table;vertical-align:middle;max-height:30vh;overflow:hidden">
+            <img ng-src="{{'api/'+dn.image}}" class="img-fluid" ng-if="dn.image">
+        </div>
+        <div class="col small">
+            <div class="mb-1">
+                {{dn.name}} <span class="italic text-muted" ng-if="dn.ha==1">sbg. ( Hamba Allah )</span>
+            </div>
+            <div class="mb-1">
+                <span class="fa fa-phone"></span>&nbsp;{{dn.phone}}
+            </div>
+            <div class="mb-1">
+                <span class="fa fa-coins"></span>&nbsp;{{helper.toCurrency(dn.amount)}}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="grey-backdrop text-center" ng-show="tab==1">
+    <img ng-src="{{'api/'+image}}" style="height:100%;width:auto;" ng-if="image">
+    <img class="bg-white" ng-src="assets/img/picture.png" style="height:100%;width:auto;" ng-if="!image">
+    <div class="p-3" style="position:fixed;bottom:0;left:0;width:100%">
+        <div class="col-6" style="margin:auto">
+            <button type="button" class="btn btn-light" ng-click="tab=0">
+                Batal
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="submit()">
+                Kirim
+            </button>
+        </div>
+    </div>
+</div>

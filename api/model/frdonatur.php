@@ -11,4 +11,5 @@ class FrDonatur extends Model{
         'amount'=>'INT DEFAULT 0',
         'ts'=>'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
     );
+    public $join='campaign';
 }
