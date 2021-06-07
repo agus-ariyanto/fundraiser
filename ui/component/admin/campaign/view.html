@@ -9,7 +9,7 @@
             <h4 class="text-center mb-3">{{c.title}}</h4>
             <div class="row">
                 <div class="col" ng-repeat="cc in c.picture" ng-click="showImage(c)">
-                    <img src="api/{{cc.image}}" style="width:100%">
+                    <img ng-src="{{'api/'+cc.image}}" style="width:100%" ng-if="cc.image">
                 </div>
             </div>
 
@@ -165,7 +165,7 @@
                         <span class="fa fa-times"></span>
                     </button>
                 </div>
-                <img src="api/{{p.image}}" class="img-fluid">
+                <img ng-src="{{'api/'+p.image}}" class="img-fluid" ng-if="p.image">
             </div>
         </div>
     </div>

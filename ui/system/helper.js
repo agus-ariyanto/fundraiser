@@ -61,15 +61,26 @@ define([], function(){
         }
 
         api.toCurrency=function(val){
-          if(val==''||val==undefined||val==0||val=='0') return '0';
+          //if(val==''||val==undefined||val==0||val=='0') return '0';
+          val=val||'';
           var v=val.toString().replace(/[^0-9]/g,'');
           return v.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
         }
         api.toPhone=function(val){
-            val=val||' ';
+          val=val||' ';
           return val.replace(/[^0-9]/g,'').replace(/(\d\d\d\d)(?=(\d))/g, "$1\-");
         }
+        api.toPhoneAlias=function(val,fix){
+            //return val.replace(/(?<!\()\d(?!\d?$)/g,'x');
 
+            //depan belakang default patern 08xx-xxxx-xx12
+            if(!val) return '';
+            fix=fix||2;
+            var a=val.split('');
+            var b=a.splice(0,fix);
+            var c=a.splice((a.length-fix),fix);
+            return b.join('')+a.join('').replace(/\d/g,'x')+c.join('');
+        }
         api.terbilang=function(val){
           var v=tbl(val);
           return v;

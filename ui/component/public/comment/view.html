@@ -4,7 +4,11 @@
     </div>
     <div class="mb-3">
        <input type="text" ng-model="data.phone" class="form-control form-control-sm" placeholder="masukkan nomor kontak">
-       <span class="small italic"><small>* kontak anda tidak akan kami tampilkan</small></span>
+       <span class="small italic">
+           <small>
+               * kontak akan kami samarkan
+           </small>
+       </span>
     </div>
     <div class="mb-3">
        <textarea  class="form-control form-control-sm" rows="2" ng-model="data.content" placeholder="pertanyaan"></textarea>
@@ -25,19 +29,28 @@
        </button>
 </div>
 
-<div class="col border bg-light small p-2 comments" ng-show="tab==0">
+<div class="col border bg-light small p-2 mb-3 comments" ng-show="tab==0">
     <div ng-repeat="cm in table">
         <div class="row py-1">
             <div class="col-11">
-                <div class="p-3 bg-white rounded small">
-                    <div class="col"><strong>{{cm.name}}</strong></div>
-                    <pre class="text-reset">{{cm.content}}</pre>
+                <div class="p-2 bg-white rounded">
+                    <div class="row mb-1">
+                        <div class="col"><strong>{{cm.name}}</strong></div>
+                        <div class="col text-muted text-end">
+                                {{helper.toPhoneAlias(cm.phone)}}
+                        </div>
+                    </div>
+                    <pre class="text-muted" ng-if="cm.mark<2">{{cm.content}}</pre>
+                    <pre class="text-muted" ng-if="cm.mark==2">Pertanyaan ini telah dihapus oleh Admin</pre>
                     <div class="row">
                         <div class="col">
-                            <em>{{helper.toFormat(cm.ts)}}</em>
+                                {{helper.toFormat(cm.ts)}}
                         </div>
                         <div class="col text-end">
-                            <strong ng-click="reply(cm)" class="pointer">
+                            <strong ng-click="reply(cm)" class="pointer" ng-if="cm.mark<2">
+                                <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
+                            </strong>
+                            <strong  class="text-muted disabled" disabled  ng-if="cm.mark==2">
                                 <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
                             </strong>
                         </div>
@@ -51,15 +64,24 @@
         <div class="row py-1" ng-repeat="rp in cm.reply">
             <div class="col"></div>
             <div class="col-11">
-                <div class="px-3 bg-white rounded small">
-                    <div class="mb-1"><strong>{{rp.name}}</strong></div>
-                    <pre class="text-reset">{{rp.content}}</pre>
+                <div class="p-2 bg-white rounded">
+                    <div class="row mb-1">
+                        <div class="col"><strong>{{rp.name}}</strong></div>
+                        <div class="col text-muted text-end">
+                                {{helper.toPhoneAlias(rp.phone)}}
+                        </div>
+                    </div>
+                    <pre class="text-muted" ng-if="rp.mark<2">{{rp.content}}</pre>
+                    <pre class="text-muted" ng-if="rp.mark==2">Balasan ini telah dihapus oleh Admin</pre>
                     <div class="row">
                         <div class="col">
-                            <em>{{helper.toFormat(rp.ts)}}</em>
+                                {{helper.toFormat(rp.ts)}}
                         </div>
                         <div class="col text-end">
-                            <strong ng-click="reply(cm)" class="pointer">
+                            <strong ng-click="reply(cm)" class="pointer"  ng-if="rp.mark<2">
+                                <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
+                            </strong>
+                            <strong  class="text-muted disabled" disabled  ng-if="rp.mark==2">
                                 <span class="fa fa-reply"></span>&nbsp;&nbsp;balas
                             </strong>
                         </div>

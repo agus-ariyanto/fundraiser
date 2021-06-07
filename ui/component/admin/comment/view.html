@@ -1,33 +1,86 @@
-<div class="border-bottom mb-3">
-    <div class="row mb-3">
-        <div class="col">
-            <strong>Agus Ariyanto</strong>
+<div class="grey-backdrop" ng-show="tab>0">
+    <form class="form col-md-6 mb-6"  ng-submit="submit()" ng-show="tab==1">
+        <!-- form donasi -->
+        <div class="mb-3">
+            <textarea class="form-control form-control-sm" readonly disabled>{{data.comment_content}}</textarea>
         </div>
-        <div class="col-8 italic text-muted text-center">
-            Title Campaign
+        <div class="col" ng-show="tab==1">
+            <div class="form-floating mb-3">
+                <textarea class="form-control" id="reply-nama" ng-model="data.content" placeholder="nama" required>
+                </textarea>
+                <label for="reply-nama">Balasan</label>
+            </div>
+            <div class="mb-3 text-end">
+                <button type="button" class="btn btn-light btn-sm" ng-click="tab=0">
+                    &nbsp;&nbsp;Batal
+                </button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="fa fa-paper-plane"></span>&nbsp;&nbsp;Kirim
+                </button>
+            </div>
         </div>
-        <div class="col text-end">
-            Reply : 12/05/2021
+    </form>
+    <form class="form col-md-6 mb-6"  ng-submit="submit()" ng-show="tab==2">
+        <div class="mb-3">
+            Pertanyaan atau Balasan ini hanya menampilkan&nbsp;&nbsp;
+            <span class="text-muted">
+                <em>Pertanyaan atau balasan ini telah dihapus oleh Admin</em>
+            </span>
         </div>
-    </div>
+        <div class="mb-3 text-end">
+            <button type="button" class="btn btn-light btn-sm" ng-click="tab=0">
+                &nbsp;&nbsp;Batal
+            </button>
+            <button type="submit" class="btn btn-primary btn-sm">
+                <span class="fa fa-paper-plane"></span>&nbsp;&nbsp;Kirim
+            </button>
+        </div>
+    </form>
+</div>
 
 
-    <div class="mb-3">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-    <div class="mb-3 text-end">
-        <button type="button" class="btn btn-outline-primary btn-sm">
-            <span class="fa fa-reply"></span>&nbsp;Reply
-        </button>
-        <button type="button" class="btn btn-outline-secondary btn-sm">
-            <span class="fa fa-pencil"></span>&nbsp;Sensor Kata
-        </button>
-        <button type="button" class="btn btn-danger btn-sm">
-            <span class="fa fa-times"></span>&nbsp;Hapus
-        </button>
+<div  ng-show="tab==0">
+    <div class="p-3 mb-3 border-bottom  " ng-repeat="cm in table">
 
+        <div class="mb-3 small">
+            <span class="text-primary" ng-if="cm.comment_id==0">Tanya </span>&nbsp;
+            <span class="text-success" ng-if="cm.comment_id!=0">Balasan </span>&nbsp;
+            <span>{{cm.campaign_title}}</span>
+        </div>
+        <div class="text-muted" ng-if="cm.mark==2">
+            <small>Ditampilkan sebagai&nbsp;:&nbsp;<em>Pertanyaan atau balasan ini telah dihapus oleh Admin</em></small>
+        </div>&nbsp;
+        <pre class="mb-3 rounded small bg-light border p-3">{{cm.content}}</pre>
+        <div class="row mb-3">
+            <div class="col">
+                <strong>{{cm.name}}</strong>
+
+                <span class="small"><span class="fa fa-phone"></span>&nbsp;{{cm.phone}}</span>
+            </div>
+            <div class="col text-end">
+                <span class="small">
+                    <span class="fa fa-calendar"></span>&nbsp;{{helper.toFormat(cm.ts)}}
+                </span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col text-end">
+                <button type="button" class="btn btn-outline-primary btn-sm" ng-click="reply(cm)">
+                    <span class="fa fa-reply"></span>&nbsp;Balas
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="remove(cm)">
+                    <span class="fa fa-times"></span>&nbsp;Hapus
+                </button>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+
+
 
 <form ng-submit="submit()" ng-show="false">
     <div class="grey-backdrop p-3">

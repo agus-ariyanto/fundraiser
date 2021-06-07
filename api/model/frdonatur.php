@@ -6,11 +6,9 @@ class FrDonatur extends Model{
         'name'=>'VARCHAR(128)',
         'ha'=>'INT DEFAULT 0',
         'phone'=>'VARCHAR(128)',
-        'email'=>'VARCHAR(256)',
-        'city'=>'VARCHAR(256)',
         'confirmed'=>'INT DEFAULT 0',
         'image'=>'VARCHAR(128)',
-        'amount'=>'INT'
+        'amount'=>'INT DEFAULT 0',
         'ts'=>'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
     );
 }

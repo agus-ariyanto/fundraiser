@@ -1,38 +1,26 @@
-
-
-<div class="col small p-2">
-    <div class="row text-success py-2">
+<div class="small p-2">
+    <div class="row py-2 {{dn.confirmed==0?'text-muted':''}}" ng-repeat="dn in table">
         <div class="col italic">
-            <div class="col"> <strong>Agus Ariyanto</strong> </div>
-            <div class="row small">
-                <div class="col">
-                    0989707097
-                </div>
-                <div class="col">
-                    Jakarta
-                </div>
+            <div class="col">
+                <strong>
+                    <span ng-if="dn.ha==1">Hamba Allah</span>
+                    <span ng-if="dn.ha!=1">{{dn.name}}</span>
+                </strong>
             </div>
+            <div class="col">{{helper.toPhoneAlias(dn.phone)}}</div>
         </div>
         <div class="col text-end">
-            <div class="col small">&nbsp;</div>
-            <div class="col"><strong>1.000.000</strong></div>
+            <div class="col">&nbsp;</div>
+            <div class="col"><strong>{{helper.toCurrency(dn.amount)}}</strong></div>
         </div>
     </div>
-    <div class="row text-muted py-2">
-        <div class="col italic">
-            <div class="col"> <strong>Agus Ariyanto</strong> </div>
-            <div class="row small">
-                <div class="col">
-                    0989707097
-                </div>
-                <div class="col">
-                    Jakarta
-                </div>
-            </div>
-        </div>
-        <div class="col text-end">
-            <div class="col small">&nbsp;</div>
-            <div class="col"><strong>1.000.000</strong></div>
-        </div>
+</div>
+<div class="p-2 text-center" ng-if="!table.length">
+    <h4>Belum Ada donatur</h4>
+    <div class="mb-3">Jadilah anda yang pertama kali berdonasi</div>
+    <div class="">
+        <button type="button" class="btn btn-primary" ng-click="openFormDonasi(campaign)">
+            <span class="fa fa-heart"></span>&nbsp;&nbsp;Donasi
+        </button>
     </div>
 </div>

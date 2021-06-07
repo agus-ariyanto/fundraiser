@@ -17,6 +17,13 @@ define(['ui/system/api','ui/system/helper'], function(){
         }
 
         $scope.menu.toTab=function(tab){
+            /*
+            <div alt-component="admin/campaign" data-scope="campaign" ng-show="menu.tab==0"></div>
+            <div alt-component="admin/donatur" data-scope="donatur" ng-show="menu.tab==1"></div>
+            <div alt-component="admin/comment" data-scope="comment" ng-show="menu.tab==2"></div>
+            <div alt-component="admin/contact" data-scope="contact" ng-show="menu.tab==3"></div>
+            <div alt-component="admin/rekening" data-scope="rekening" ng-show="menu.tab==4"></div>
+            */
             $scope.menu.tab=tab;
             for(var i=0;i<$scope.menu.data.length;i++) $scope.menu.data[i].active=false;
             $scope.menu.data[tab].active=true;

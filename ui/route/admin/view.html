@@ -1,15 +1,8 @@
 <div alt-component="admin/menu" data-scope="menu"></div>
-
-<div alt-component="admin/campaign" data-scope="campaign" ng-show="menu.tab==0"></div>
-<div alt-component="admin/donatur" data-scope="donatur" ng-show="menu.tab==1"></div>
-<div alt-component="admin/comment" data-scope="comment" ng-show="menu.tab==2"></div>
-<div alt-component="admin/contact" data-scope="contact" ng-show="menu.tab==3"></div>
-<div alt-component="admin/rekening" data-scope="rekening" ng-show="menu.tab==4"></div>
-<!--
-{icon:'flag',title:'Campaign',tab:0,active:true},
-{icon:'calculator',title:'Donatur',tab:1},
-{icon:'comment',title:'Comment',tab:2},
-{icon:'phone',title:'Contact',tab:3},
-{icon:'qrcode',title:'Rekening',tab:4},
-{icon:'book',title:'Archieve',tab:5}
- -->
+<div class="container-fluid">
+    <div alt-component="admin/campaign" data-scope="campaign" ng-show="menu.tab==0"></div>
+    <div alt-component="admin/donatur" data-scope="donatur" ng-show="menu.tab==1"></div>
+    <div alt-component="admin/comment" data-scope="comment" ng-show="menu.tab==2"></div>
+    <div alt-component="admin/contact" data-scope="contact" ng-show="menu.tab==3"></div>
+    <div alt-component="admin/rekening" data-scope="rekening" ng-show="menu.tab==4"></div>
+</div>

@@ -53,9 +53,15 @@ class Ctrl extends Base{
     }
 
     protected function selectChild($modelchild,$model_id){
-        $this->addModel($modelchild);
-        $this->$modelchild->andWhere($this->model.'_id',$model_id);
-        return $this->$modelchild->select();
+    //    $this->addModel($modelchild);
+    //    $this->$modelchild->andWhere($this->model.'_id',$model_id);
+        $params=new Params;
+        if(!$params->key('order')) $order=$params->key('order');
+        $params->clear();
+        $params->set($this->model.'_id',array('equal'=>$model_id));
+        $params->set('order',$order);
+        $res=$this->db->select($modelchild,$params);
+        return $res['data'];
     }
 
     function select(){

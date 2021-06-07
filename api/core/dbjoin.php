@@ -23,7 +23,7 @@ class DbJoin extends DbSQL{
             foreach ($var as $value) {
                 $class=$this->model($value);
                 $jointable=new $class;
-                $name=$jointable->tableName();
+    !            $name=$jointable->tableName();
                 $alias=$jointable->tableAlias();
                 $cols=$jointable->colNames();
                 unset($cols['id']);
@@ -177,6 +177,10 @@ class DbJoin extends DbSQL{
 
     function select($model,$params,$optand=''){
         $result=$this->querySelect($model,$params->all(),$optand);
+        if(DEV_MODE==0) {
+            unset($result['qry']);
+            unset($result['countqry']);
+        }
         $result['count']=$this->query($result['countqry'])[0]['c'];
         $result['data']=$this->query($result['qry']);
         return $result;
