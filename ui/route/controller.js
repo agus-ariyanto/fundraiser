@@ -32,7 +32,12 @@ define(['ui/system/api','ui/system/helper'], function(){
         }
 
         $scope.getCampaign=function(){
-            Api.Get('campaign',{cascade:1})
+            var d={
+                mark:{equal:1},
+                order:'id ASC',
+                cascade:1
+            }
+            Api.Get('campaign',d)
             .then(function(res){
                 $scope.table=res.data;
             });
@@ -90,7 +95,9 @@ define(['ui/system/api','ui/system/helper'], function(){
             rightCanvas.show();
         }
 
-
+        $scope.editor=function(){
+            window.location.href=alt.baseUrl+alt.loginRoute;
+        }
          $scope.init();
 
 /*end controller*/

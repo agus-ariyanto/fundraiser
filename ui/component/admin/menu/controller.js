@@ -11,8 +11,9 @@ define([], function () {
             // for(var i=0;i<$scope.data.length;i++) $scope.data[i].active=false;
             // $scope.data[tab].active=true;
         }
-        
+
         $scope.logout=function(){
+            $auth.setUserData({});
             $auth.logout();
             window.location.href=alt.baseUrl+alt.loginRoute;
         }

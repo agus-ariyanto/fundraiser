@@ -132,3 +132,11 @@
         </div>
     </div>
 </div>
+<div class="text-center" ng-if="!table.length">
+    <h3>{{alt.title}}</h3>
+    <div class="mb-3">Tidak ada Penggalangan dana yang ditampilkan</div>
+
+    <button type="button" class="btn btn-primary btn-lg" ng-click="editor()">
+        <span class="fa fa-pencil"></span>&nbsp;&nbsp;Pergi ke Editor
+    </button>
+</div>

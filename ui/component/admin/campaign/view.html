@@ -1,79 +1,7 @@
-<div  ng-show="step==0">
-    <!--
-    <div ng-repeat="c in table">
-        <div class="text-end mb-3">
-            <button type="button" class="btn btn-outline-secondary" ng-click="add()">
-                <span class="fa fa-plus"></span>
-            </button>
-        </div>
-        <div class="{{c.theme_bgtxt}} py-3">
-            <h4 class="text-center mb-3">{{c.title}}</h4>
-            <div class="row">
-                <div class="col" ng-repeat="cc in c.picture" ng-click="showImage(c)">
-                    <img ng-src="{{'api/'+cc.image}}" style="width:100%" ng-if="cc.image">
-                </div>
-            </div>
-
-
-            <div class="p-3" ta-bind ng-model="c.content"> </div>
-        </div>
-
-        <div class="row g-3 py-3 small">
-            <div class="col-6 px-2">
-                <div class="col mb-3 rounded border {{c.theme_border}} p-2">
-                    <div class="row mb-3">
-                        <div class="col-1">Goal</div>
-                        <div class="col">{{helper.toCurrency(c.goal)}}</div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-1">Terkumpul</div>
-                        <div class="col">{{helper.toCurrency(c.amount)}}</div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-1">Rekening</div>
-                        <div class="col">
-                            <div class="">
-                                {{c.rek_rekno}}
-                            </div>
-                            <div class="">
-                                {{c.rek_bank}}
-                            </div>
-                            <div class="">
-                                {{c.an}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 px-2">
-                <div class="col mb-3 rounded border {{c.theme_border}} p-2">
-                    <div class="row">
-                        <div class="col-1">Contact</div>
-                        <div class="col">
-                            <div class="">
-                                {{c.contact_phone}}
-                            </div>
-                            <div class="">
-                                {{c.contact_name}}
-                            </div>
-                            <div class="">
-                                {{c.contact_email}}
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-1">Mulai</div>
-                        <div class="col">{{helper.toFormat(c.start)}}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1">Berakhir</div>
-                        <div class="col">{{helper.toFormat(c.stop)}}</div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+<span ng-init="btn_modal=['','success','danger','secondary']"></span>
+<span ng-init="modal_icon=['','paper-plane','power-off','file']"></span>
+<span ng-init="modal_text=['','  Rilis  ','  Close (Arsip) ',' Draft ']"></span>
+<div ng-show="step==0">
 
         <div class="border-bottom {{c.theme_border}} mb-3" ng-repeat="c in table | filter:filter_name ">
             <div class="{{c.theme_bgtxt}} p-1">
@@ -142,10 +70,11 @@
 
 
         <div class="text-end mb-3 py-3">
-            <button type="button" class="btn btn-outline-success btn-sm" ng-click="rilis(c)">
+
+            <button type="button" class="btn btn-outline-success btn-sm" ng-click="rilis(c)" ng-disabled="c.mark==1">
                 <span class="fa fa-paper-plane"></span>&nbsp;&nbsp;Rilis
             </button>
-            <button type="button" class="btn btn-outline-dark btn-sm" ng-click="draft(c)">
+            <button type="button" class="btn btn-outline-dark btn-sm" ng-click="draft(c)" ng-disabled="c.mark==0">
                 <span class="fa fa-file"></span>&nbsp;&nbsp;Draft
             </button>
             <button type="button" class="btn btn-outline-primary btn-sm" ng-click="edit(c)">
@@ -262,3 +191,19 @@ id="photo-upload">
     <button type="submit" class="btn btn-primary">Save ( as Draft )</button>
 </div>
 </form>
+<div class="grey-backdrop" ng-show="open_modal>0" ng-click="open_modal=0">
+    <div class="col-6 form">
+        <div class="text-center mb-3 border-bottom">
+            <h3>{{modal.title}}</h3>
+        </div>
+        <div class="text-end">
+            <button type="button" class="btn btn-light">&nbsp;Batal&nbsp;</button>
+
+            <button type="button" class="btn btn-{{btn_modal[open_modal]}}" ng-click="submitModal()">
+                <span class="fa fa-{{modal_icon[open_modal]}}"></span>
+                <span>{{modal_text[open_modal]}}</span>
+            </button>
+
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 <?php
-// status
+// mark
 // 0:draft
 // 1:rilis
 // 2:close ( arsip )
@@ -19,7 +19,7 @@ class FrCampaign extends Model{
         'ts'=>'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
         'start'=>'DATETIME',
         'stop'=>'DATETIME',
-        'status'=>'INT DEFAULT 0',
+        'mark'=>'INT DEFAULT 0',
     );
     public $join='rek,contact,theme';
     public $child='picture';

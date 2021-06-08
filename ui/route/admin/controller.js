@@ -52,11 +52,19 @@ define(['ui/system/api','ui/system/helper'], function(){
                 });
             }
         };
+
+        // security login
+        $scope.init=function(){
+            if(!$auth.userdata.grup_id||$auth.userdata.grup_id>2){
+                window.location.href=alt.baseUrl+alt.loginRoute;
+            }
+        }
         $scope.comment={};
         $scope.donatur={};
         $scope.rekening={};
         $scope.contact={};
         $scope.menu.toTab(0);
+        $scope.init();
 
 /*end controller*/
         }];

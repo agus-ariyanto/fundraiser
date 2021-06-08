@@ -9,7 +9,8 @@ define(['ui/system/api','ui/system/helper'], function(){
         $scope.rek=[];
         $scope.contact=[];
         $scope.deleted_picture=[];
-
+        $scope.modal={}
+        $scope.open_modal=0;
         Api.Get('theme',{order:'id ASC'})
         .then(function(res){
             $scope.theme=res.data;
@@ -24,7 +25,11 @@ define(['ui/system/api','ui/system/helper'], function(){
             })
             .then(function(res){
                 $scope.contact=res.data;
-                return Api.Get('campaign',{cascade:1});
+                var d={
+                    mark:{lte:1},
+                    cascade:1
+                }
+                return Api.Get('campaign',d);
             })
             .then(function(res){
                 $scope.table=[];
@@ -94,6 +99,39 @@ define(['ui/system/api','ui/system/helper'], function(){
             $scope.data.tanggal_stop=Date.parse(val.stop);
             $scope.step=1;
         }
+        $scope.rilis=function(val){
+            $scope.modal=val;
+            $scope.data={
+                id:val.id,
+                mark:1
+            }
+            $scope.open_modal=1;
+        }
+        $scope.close=function(val){
+            $scope.modal=val;
+            $scope.data={
+                id:val.id,
+                mark:2
+            }
+            $scope.open_modal=2;
+        }
+        $scope.draft=function(val){
+            $scope.modal=val;
+            $scope.data={
+                id:val.id,
+                mark:0
+            }
+            $scope.open_modal=3;
+        }
+        $scope.submitModal=function(){
+            Api.Post('save/campaign',$scope.data)
+            .then(function(res){
+                $scope.init();
+                $scope.step=0;
+            });
+        }
+
+
 
         $scope.init();
 
