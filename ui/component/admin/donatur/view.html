@@ -1,25 +1,29 @@
 <div class="border-bottom mb-3" ng-repeat="dn in table">
     <div class="row">
-        <div class="col">
-            <span class="fa fa-flag"></span>&nbsp;{{dn.campaign_title}}
+        <div class="col {{dn.confirmed==1?'text-success':''}}{{dn.confirmed==2?'text-danger':''}}">
+            <small><span class="fa fa-flag"></span></small>&nbsp;{{dn.campaign_title}}
         </div>
         <div class="col">
-            <div class="mb-1 italic" >
-                <span class="text-success" ng-if="dn.confirmed==1"><strong>Terkonfirmasi</strong></span>
-                <span ng-if="dn.confirmed!=1"><strong>Belum Dikonfirmasi</strong></span>
+            <div class="mb-1" >
+                <span class="badge bg-secondary text-white" ng-if="dn.confirmed==0">Belum Dikonfirmasi</span>
+                <span class="badge bg-success text-white" ng-if="dn.confirmed==1">Telah dikonfirmasi</span>
+                <span class="badge bg-danger text-white" ng-if="dn.confirmed==2">Ditolak</span>
             </div>
         </div>
         <div class="col text-end">
-            <button type="button" class="btn btn-outline-primary btn-sm" ng-click="confirm(dn)" ng-if="dn.confirmed!=1">
+            <button type="button" class="btn btn-outline-primary btn-sm" ng-click="confirm(dn)" ng-if="dn.confirmed==0">
                 <span class="fa fa-check-circle"></span>&nbsp;Confirm
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" ng-click="reject(dn)" ng-if="dn.confirmed==0">
+                <span class="fa fa-check-circle"></span>&nbsp;Reject
             </button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-3" style="display:table;vertical-align:middle;max-height:30vh;overflow:hidden">
+    <div class="row mb-3">
+        <div class="col-4" style="max-height:6rem; overflow:hidden">
             <img ng-src="{{'api/'+dn.image}}" class="img-fluid" ng-if="dn.image">
         </div>
-        <div class="col small">
+        <div class="col">
             <div class="mb-1">
                 {{dn.name}} <span class="italic text-muted" ng-if="dn.ha==1">sbg. ( Hamba Allah )</span>
             </div>
