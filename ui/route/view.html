@@ -65,17 +65,17 @@
         </div>
         <div class="p-3" ta-bind ng-model="c.content"></div>
         <div class="row  p-3 small">
-            <div class="col mb-3">
+            <div class="col-sm mb-3">
                 <div class="g-3">Rekening</div>
-                <div class="g-3"><span class="fa fa-coins small-icon"></span><span>{{c.rek_bank}}</span></div>
-                <div class="g-3"><span class="fa fa-qrcode small-icon"></span><span>{{c.rek_rekno}}</span> <span class="fa fa-copy"></span> </div>
-                <div class="g-3"><span class="fa fa-user-tie small-icon"></span><span>{{c.rek_an}}</span></div>
+                <div class="g-3"><span class="fa fa-coins"></span><span class="px-3">{{c.rek_bank}}</span></div>
+                <div class="g-3"><span class="fa fa-qrcode"></span><span class="px-3">{{c.rek_rekno}}</span><span class="fa fa-copy"></span> </div>
+                <div class="g-3"><span class="fa fa-user-tie"></span><span class="px-3">{{c.rek_an}}</span></div>
             </div>
-            <div class="col mb-3">
+            <div class="col-sm mb-3">
                 <div>Contact</div>
-                <div><span class="fa fa-user small-icon"></span><span>{{c.contact_name}}</span></div>
-                <div><span class="fa fa-phone small-icon"></span><span>{{c.contact_phone}}</span></div>
-                <div><span class="fa fa-envelope small-icon"></span><span>{{c.contact_email}}</span></div>
+                <div><span class="fa fa-user"></span><span class="px-3">{{c.contact_name}}</span></div>
+                <div><span class="fa fa-phone"></span><span class="px-3">{{c.contact_phone}}</span></div>
+                <div><span class="fa fa-envelope"></span><span class="px-3">{{c.contact_email}}</span></div>
             </div>
         </div>
     </div>
@@ -91,33 +91,37 @@
             </div>
         </div>
     </div>
-    <div class="row g-3 small">
+    <!-- <div class="row g-3 small"> -->
         <!-- <div class="col-6 px-2"> -->
-        <div class="col p-2">
-            <div class="row mb-3">
-                <div class="col-2">&nbsp;&nbsp;Mulai</div>
-                <div class="col {{c.theme_bgtxt}} rounded border">{{helper.toFormat(c.start)}}</div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-2">&nbsp;&nbsp;Terkumpul</div>
-                <div class="col {{c.theme_bgtxt}} rounded border">{{helper.toCurrency(c.amount)}}</div>
-            </div>
-        </div>
-        <!-- </div> -->
-        <!-- <div class="col-6 px-2"> -->
-        <div class="col p-2 px-3">
-            <div class="row mb-3">
-                <div class="col-2">&nbsp;&nbsp;Berakhir</div>
-                <div class="col {{c.theme_bgtxt}} rounded border">{{helper.toFormat(c.stop)}}</div>
+        <div class="small">
+            <div class="row">
+                <div class="col">
+                    <div>Mulai</div>
+                    <div class="{{c.theme_bgtxt}} px-2 rounded border">{{helper.toFormat(c.start)}}</div>
+                </div>
+                <div class="col">
+                    <div>Berakhir</div>
+                    <div class="{{c.theme_bgtxt}} px-2 rounded border">{{helper.toFormat(c.stop)}}</div>
 
+                </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-2">&nbsp;&nbsp;Target</div>
-                <div class="col {{c.theme_bgtxt}} rounded border">{{helper.toCurrency(c.goal)}}</div>
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="col-6 px-2"> -->
+        <!-- <div class="col p-2 px-3"> -->
+            <div class="row">
+                <div class="col">
+                    <div>Terkumpul</div>
+                    <div class="{{c.theme_bgtxt}} px-2 rounded border">{{helper.toCurrency(c.amount)}}</div>
+                </div>
+                <div class="col">
+                    <div>Target</div>
+                    <div class="{{c.theme_bgtxt}} px-2 rounded border">{{helper.toCurrency(c.goal)}}</div>
+                </div>
             </div>
         </div>
         <!-- </div> -->
-    </div>
+    <!-- </div> -->
 
         <div class="col-12 py-3">
             <button class="btn btn-outline-secondary" type="button" ng-click="openComments(c)">

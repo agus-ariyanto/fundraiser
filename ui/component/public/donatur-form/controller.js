@@ -21,9 +21,9 @@ define(['ui/system/api','ui/system/helper'], function(){
             if($scope.data.ha) $scope.data.ha=1;
             Api.Post('donatur',$scope.data)
             .then(function(res){
-                var a=$scope.campaign.amount+$scope.data.amount;
+                var a=Helper.toNumber($scope.campaign.amount)+Helper.toNumber($scope.data.amount);
                 var b=$scope.campaign.donatur+1;
-                return Api.Post('save/campaign',{id:$scope.campaign.id,amount:a})
+                return Api.Post('save/campaign',{id:$scope.campaign.id,amount:a,donatur:b})
             })
             .then(function(res){
                 var d=$auth.userdata;
