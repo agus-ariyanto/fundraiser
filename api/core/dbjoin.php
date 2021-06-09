@@ -177,12 +177,12 @@ class DbJoin extends DbSQL{
 
     function select($model,$params,$optand=''){
         $result=$this->querySelect($model,$params->all(),$optand);
+        $result['count']=$this->query($result['countqry'])[0]['c'];
+        $result['data']=$this->query($result['qry']);
         if(DEV_MODE==0) {
             unset($result['qry']);
             unset($result['countqry']);
         }
-        $result['count']=$this->query($result['countqry'])[0]['c'];
-        $result['data']=$this->query($result['qry']);
         return $result;
     }
 
