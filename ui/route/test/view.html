@@ -1,0 +1,37 @@
+<div class="" ng-show="step==1">
+    <form class="" ng-submit="submit()">
+      <div class="form-floating mb-3">
+          <input id="test-nama" type="text" class="form-control" ng-model="data.nama">
+          <label for="test-nama">Nama</label>
+      </div>
+      <div class="form-floating mb-3">
+          <input id="test-telp" type="text" class="form-control" ng-model="data.telp">
+          <label for="test-telp">Telpon</label>
+      </div>
+      <div class="text-end">
+          <button type="button" class="btn btn-light" ng-click="step=0">Batal</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+</div>
+<table class="table"  ng-show="step==0">
+    <thead>
+        <tr>
+            <td>Nama</td>
+            <td>Telpon</td>
+            <td>
+                <button type="button" class="btn btn-primary" ng-click="add()">Baru</button>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="s in table">
+            <td>{{s.nama}}</td>
+            <td>{{s.telp}}</td>
+            <td>
+                <button type="button" class="btn btn-danger" ng-click="edit(s)">Edit</button>
+            </td>
+        </tr>
+    </tbody>
+
+</table>

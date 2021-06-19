@@ -23,7 +23,7 @@ class DbJoin extends DbSQL{
             foreach ($var as $value) {
                 $class=$this->model($value);
                 $jointable=new $class;
-    !            $name=$jointable->tableName();
+                $name=$jointable->tableName();
                 $alias=$jointable->tableAlias();
                 $cols=$jointable->colNames();
                 unset($cols['id']);
